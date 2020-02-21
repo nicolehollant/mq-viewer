@@ -35,7 +35,7 @@ function createWindow () {
     minWidth: 400,
     minHeight: 500,
     backgroundColor: darkmode ? '#2C2C2E' : '#E5E5EA',
-    frame: false,
+    titleBarStyle: 'hiddenInset',
     webPreferences: { nodeIntegration: true, webviewTag: true } 
   })
 

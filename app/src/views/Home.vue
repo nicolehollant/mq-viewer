@@ -1,13 +1,13 @@
 <template>
 <div class="h-screen overflow-hidden flex flex-col">
-  <header @mousedown="ignore" @dblclick="expand" class="flex justify-between text-gray-400 py-2 px-2 bg-sys-5">
-    <div class="button__row">
-      <button class="bg-red-500"><icon class="icon" icon="times" /></button>
+  <header @mousedown="ignore" @dblclick="expand" class="flex justify-between text-gray-400 px-2 bg-sys-5">
+    <div class="button__row w-16">
+      <!-- <button class="bg-red-500"><icon class="icon" icon="times" /></button>
       <button class="bg-yellow-500"><icon class="icon" icon="minus" /></button>
-      <button class="bg-green-500" @click="fullscreen"><icon class="icon" icon="expand-alt" /></button>
+      <button class="bg-green-500" @click="fullscreen"><icon class="icon" icon="expand-alt" /></button> -->
     </div>
     <div class="max-w-md mx-auto w-0 flex-grow flex items-center">
-      <TextInput v-model="val" @submit="changeUrl" class="no-drag w-0 flex-grow block mx-4">
+      <TextInput v-model="val" @submit="changeUrl" class="no-drag w-0 flex-grow block ml-1 mr-4">
         <template v-slot:icon>
           <icon icon="globe-americas" />
         </template>
@@ -41,7 +41,7 @@
       <h3 class="text-center text-sm font-medium my-2 text-sys-2">{{width}}px</h3>
       <button @click="() => checkWebview(index)">ahhh</button>
       <webview 
-        class="mx-4 pb-2 h-0 flex-grow"
+        class="inline-flex mx-4 pb-2 h-0 flex-grow"
         :src="url" 
         frameborder="0"
         @did-navigate="handleNav"
@@ -81,13 +81,14 @@ export default {
   data() {
     return {
       url: 'http://localhost:8081',
-      widths: ['320', '768', '1024'],
+      widths: ['375', '768', '1024'],
       val: 'http://localhost:8081',
       clicks: 0,
       timer: null,
       delay: 300,
       sync: false,
-      fullWindow: false
+      fullWindow: false,
+      tlds: require('@/assets/tlds.json')['tlds']
     }
   },
   methods: {
@@ -99,7 +100,14 @@ export default {
       this.sync = !this.sync
     },
     changeUrl(val) {
+      if(val.startsWith('http://') || val.startsWith('https://')) 
       this.url = val
+      else if(!val.startsWith('http') && this.tlds.some(tld => val.includes(tld)))
+      this.url = `http://${val}`
+      else {
+        const search = val.split(/\s+/g).join('+')
+        this.url = `https://www.google.com/search?q=${search}`
+      }
     },
     handleNav(e) {
       if((this.sync || this.fullWindow) && e.url !== this.val) this.updateBrowsers(e.url)
@@ -138,6 +146,9 @@ export default {
 <style lang="postcss" scoped>
 header {
   -webkit-app-region: drag;
+  border-bottom: 0.25px solid var(--system-gray-6);
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
 }
 .no-drag {
   -webkit-app-region: no-drag;
