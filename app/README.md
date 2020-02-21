@@ -12,3 +12,6 @@ yarn electron:serve
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+<!-- yarn add babel-plugin-transform-remove-console -->
