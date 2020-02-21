@@ -20,3 +20,7 @@ WIP: This is a little app to help look at sites across different viewports. Sort
   - [ ] add height support
   - [ ] new device form
   - [ ] default devices
+
+## Screenshot
+
+![my site on the app](mysite.png)
