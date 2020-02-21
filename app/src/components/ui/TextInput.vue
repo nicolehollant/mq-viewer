@@ -13,6 +13,9 @@
       @focus="$event.target.select()"
       :value="value"
     />
+    <span class="icon--trailing">
+      <slot name="trailing" />
+    </span>
   </div>
 </label>
 </template>

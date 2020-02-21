@@ -6,14 +6,14 @@ import router from './router'
 import store from './store'
 import vClickOutside from 'v-click-outside'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faChevronLeft, faChevronRight, faPlus, faTimes, faGlobe, faGlobeAmericas, faExpandAlt, faMinus, faSyncAlt, faMobile, faDesktop } from '@fortawesome/free-solid-svg-icons'
+import { faChevronLeft, faChevronRight, faPlus, faTimes, faGlobe, faGlobeAmericas, faExpandAlt, faMinus, faSyncAlt, faMobile, faDesktop, faRedo } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 
 Vue.use(VueCompositionApi);
 
 
-library.add(faChevronLeft, faChevronRight, faPlus, faTimes, faGlobe, faGlobeAmericas, faExpandAlt, faMinus, faSyncAlt, faMobile, faDesktop)
+library.add(faChevronLeft, faChevronRight, faPlus, faTimes, faGlobe, faGlobeAmericas, faExpandAlt, faMinus, faSyncAlt, faMobile, faDesktop, faRedo)
 
 Vue.component('icon', FontAwesomeIcon)
 

@@ -11,6 +11,14 @@
         <template v-slot:icon>
           <icon icon="globe-americas" />
         </template>
+        <template v-slot:trailing>
+          <button 
+            @click="reloadAll" 
+            class="no-drag ml-1 w-5 h-5 flex items-center justify-center cursor-default text-sm rounded-full focus:outline-none focus:shadow-outline hover:bg-sys-4"
+          >
+            <icon icon="redo" class="icon-button" />
+          </button>
+        </template>
       </TextInput>
       <button 
         @click="changeSync" 
@@ -92,6 +100,16 @@ export default {
     }
   },
   methods: {
+    reloadAll() {
+      if(!this.fullWindow) {
+        const browsers = this.widths.map((_, i) => this.$refs[`iframe-${i}`][0])
+        for(const browser of browsers) {
+          browser.reloadIgnoringCache()
+        }
+      } else {
+        this.$refs['iframe-full'][0].reloadIgnoringCache()
+      }
+    },
     toggleFullWindow() {
       this.fullWindow = !this.fullWindow
       if(!this.fullWindow) this.url = this.val
@@ -143,7 +161,7 @@ export default {
 }
 </script>
 
-<style lang="postcss" scoped>
+<style lang="postcss">
 header {
   -webkit-app-region: drag;
   border-bottom: 0.25px solid var(--system-gray-6);
