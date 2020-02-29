@@ -43,7 +43,8 @@ export default {
 
 <style lang="postcss" scoped>
 input[type="text"] {
-  @apply w-full bg-transparent truncate overflow-hidden cursor-default
+  @apply w-full bg-transparent truncate overflow-hidden 
+  /* cursor-default */
 }
 
 input[type="text"]::selection {
