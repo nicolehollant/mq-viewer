@@ -12,6 +12,7 @@ WIP: This is a little app to help look at sites across different viewports. Sort
 [MQ Viewer Setup 0.1.0.exe](./build/MQ%20Viewer%20Setup%200.1.0.exe)
 #### Linux
 [mq-viewer_0.1.0_amd64.snap](./build/mq-viewer_0.1.0_amd64.snap)
+
 [MQ Viewer-0.1.0.AppImage](./build/MQ%20Viewer-0.1.0.AppImage)
 
 ## Or Build
