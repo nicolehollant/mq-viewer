@@ -1,4 +1,4 @@
-<img src="./app/public/logo.png" alt="mq-viewer logo" />
+<img src="./app/public/logo.png" alt="mq-viewer logo" width="128" />
 
 # mq-viewer
 
