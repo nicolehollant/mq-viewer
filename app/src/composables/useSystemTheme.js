@@ -1,6 +1,7 @@
 import { ipcRenderer } from 'electron'
 import { ref, onMounted } from '@vue/composition-api'
-function useSystemTheme () {
+
+export function useSystemTheme () {
   // originally data properties
   const theme = ref('dark')
 
@@ -26,4 +27,3 @@ function useSystemTheme () {
 
   return { theme, toggleTheme }
 }
-export default useSystemTheme;

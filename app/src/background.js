@@ -1,6 +1,8 @@
 'use strict'
 
-import { app, protocol, BrowserWindow, nativeTheme, ipcMain, screen } from 'electron'
+import fs from 'fs'
+import path from 'path'
+import { app, protocol, Menu, BrowserWindow, nativeTheme, ipcMain, screen } from 'electron'
 import {
   createProtocol,
   /* installVueDevtools */
@@ -20,12 +22,51 @@ ipcMain.on('checkCurrentTheme', (event) => {
   event.reply('currentTheme', darkmode ? 'dark' : 'light')
 })
 
+const userData = app.getPath('userData')
+const dataDirName = 'DATA'
+const dataFname = 'config.json'
+const dataPath = path.join(userData, dataDirName, dataFname)
+fs.mkdir(path.join(userData, dataDirName), { recursive: true }, (err) => { if (err) throw err; })
+fs.open(dataPath, 'a', (err) => { if (err) console.log(err) })
+
+ipcMain.on('checkDataPath', (event) => {
+  event.reply('datapath', dataPath)
+})
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([{scheme: 'app', privileges: { secure: true, standard: true } }])
+
+const name = app.getName()
+let menuItems = []
+const submenu = [{
+  label: `About ${name}`,
+  role: 'about'
+}]
+if(process.platform === 'darwin') submenu.push({
+  label: 'Quit',
+  accelerator: 'Command+Q',
+  click() { app.quit() }
+})
+menuItems.unshift({
+  label: name,
+  submenu: submenu
+})
+menuItems.push({
+  label: "Edit",
+  submenu: [
+    { label: "Undo", accelerator: "CmdOrCtrl+Z", selector: "undo:" },
+    { label: "Redo", accelerator: "Shift+CmdOrCtrl+Z", selector: "redo:" },
+    { type: "separator" },
+    { label: "Cut", accelerator: "CmdOrCtrl+X", selector: "cut:" },
+    { label: "Copy", accelerator: "CmdOrCtrl+C", selector: "copy:" },
+    { label: "Paste", accelerator: "CmdOrCtrl+V", selector: "paste:" },
+    { label: "Select All", accelerator: "CmdOrCtrl+A", selector: "selectAll:" },
+  ]
+})
 
 function createWindow () {
   // Create the browser window.
@@ -75,6 +116,8 @@ function createWindow () {
     // Load the index.html when not in development
     win.loadURL('app://./index.html')
   }
+
+  Menu.setApplicationMenu(Menu.buildFromTemplate(menuItems))
 
   win.on('closed', () => {
     win = null

@@ -1,6 +1,14 @@
 module.exports = {
   theme: {
     extend: {
+      width: {
+        max: 'max-content',
+        min: 'min-content',
+      },
+      height: {
+        max: 'max-content',
+        min: 'min-content',
+      },
       colors: {
         focus: 'var(--system-purple)',
         sys: {
@@ -11,6 +19,7 @@ module.exports = {
           '4': 'var(--system-gray-4)',
           '5': 'var(--system-gray-5)',
           '6': 'var(--system-gray-6)',
+          '7': 'var(--system-gray-7)',
           'blue': 'var(--system-blue)',
           'green': 'var(--system-green)',
           'indigo': 'var(--system-indigo)',

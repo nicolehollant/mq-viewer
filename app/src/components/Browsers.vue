@@ -1,11 +1,23 @@
 <template>
-<main class="inline-flex h-0 flex-grow w-screen overflow-x-scroll" v-if="!fullWindow">
+<main class="inline-flex h-0 flex-grow w-screen overflow-x-scroll" v-if="fullWindow">
+  <webview 
+    class="h-0 flex-grow w-full h-full"
+    :src="url" 
+    frameborder="0"
+    @did-navigate="handleNav"
+    @did-navigate-in-page="handleNav"
+    :ref="`iframe-full`"
+  />
+</main>
+<main class="inline-flex h-0 flex-grow w-screen overflow-x-scroll" v-else-if="active==='all'">
   <div 
     class="window__wrapper flex flex-col h-full"
     v-for="(width, index) of widths" :key="width"
   >
-    <h3 class="text-center text-sm font-medium my-2 text-sys-2">{{width}}px</h3>
-    <button @click="() => checkWebview(index)">ahhh</button>
+    <div class="flex justify-between mx-8">
+      <h3 class="text-center text-sm font-medium my-2 text-sys-1">{{width}}px</h3>
+      <button @click="() => checkWebview(index)" class="focus:outline-none text-sys-2 hover:text-sys-text focus:text-sys-green">Sync</button>
+    </div>
     <webview 
       class="inline-flex mx-4 pb-2 h-0 flex-grow"
       :src="url" 
@@ -18,14 +30,20 @@
   </div>
 </main>
 <main class="inline-flex h-0 flex-grow w-screen overflow-x-scroll" v-else>
-  <webview 
-    class="h-0 flex-grow w-full h-full"
-    :src="url" 
-    frameborder="0"
-    @did-navigate="handleNav"
-    @did-navigate-in-page="handleNav"
-    :ref="`iframe-full`"
-  />
+  <div class="mx-auto flex flex-col h-full">
+    <div class="flex justify-between mx-8">
+      <h3 class="text-center text-sm font-medium my-2 text-sys-2">{{active}}px</h3>
+    </div>
+    <webview 
+      class="inline-flex mx-4 pb-2 h-0 flex-grow"
+      :src="url" 
+      frameborder="0"
+      @did-navigate="handleNav"
+      @did-navigate-in-page="handleNav"
+      :ref="`iframe-full`"
+      :style="`width: ${active}px;`"
+    />
+  </div>
 </main>
 </template>
 
@@ -40,9 +58,16 @@ export default {
       type: String,
       default: ''
     },
-    widths: {
-      type: Array,
-      default: () => ['375', '768']
+    active: {
+      type: String,
+      default: ''
+    },
+    namespace: {
+      type: Object,
+      default: () => ({
+        name: 'empty',
+        widths: ['375', '768']
+      })
     },
     fullWindow: {
       type: Boolean,
@@ -53,19 +78,24 @@ export default {
       default: false
     }
   },
+  computed: {
+    widths() {
+      return this.namespace.widths
+    }
+  },
   methods: {
     reloadAll() {
-      if(!this.fullWindow) {
+      if(this.fullWindow || this.active !== 'all') {
+        this.$refs['iframe-full'].reloadIgnoringCache()  
+      } else {
         const browsers = this.widths.map((_, i) => this.$refs[`iframe-${i}`][0])
         for(const browser of browsers) {
           browser.reloadIgnoringCache()
         }
-      } else {
-        this.$refs['iframe-full'][0].reloadIgnoringCache()
       }
     },
     handleNav(e) {
-      if((this.sync || this.fullWindow) && e.url !== this.val) this.updateBrowsers(e.url)
+      if((this.sync || this.fullWindow || this.active!=='all') && e.url !== this.val) this.updateBrowsers(e.url)
     },
     updateBrowsers(url) {
       this.$emit('changeVal', url)
