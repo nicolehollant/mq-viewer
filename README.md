@@ -4,6 +4,26 @@
 
 WIP: This is a little app to help look at sites across different viewports. Sorta like a lightweight [sizzy](https://sizzy.co/)-clone.
 
+## Download
+
+#### Mac
+[MQ Viewer-0.1.0-mac.zip](./build/MQ%20Viewer-0.1.0-mac.zip)
+#### Windows
+[MQ Viewer Setup 0.1.0.exe](./build/MQ%20Viewer%20Setup%200.1.0.exe)
+#### Linux
+[mq-viewer_0.1.0_amd64.snap](./build/mq-viewer_0.1.0_amd64.snap)
+[MQ Viewer-0.1.0.AppImage](./build/MQ%20Viewer-0.1.0.AppImage)
+
+## Or Build
+
+Clone repo, run:
+```sh
+yarn install
+yarn electron:build
+```
+
+And grab proper image
+
 ## Features
 
 - [ ] url bar

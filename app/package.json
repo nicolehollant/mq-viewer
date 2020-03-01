@@ -1,5 +1,13 @@
 {
-  "name": "app",
+  "name": "mq-viewer",
+  "description": "an app to view sites at different breakpoints",
+  "author": {
+    "name": "Cole Hollant",
+    "email": "coleghollant@gmail.com"
+  },
+  "repository": {
+    "url": "https://github.com/colehollant/mq-viewer"
+  },
   "version": "0.1.0",
   "private": true,
   "scripts": {
