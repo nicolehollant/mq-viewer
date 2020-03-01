@@ -1,4 +1,4 @@
-![mq-viewer logo](app/build/icons/128x128.png)
+<img src="./app/public/logo.png" alt="mq-viewer logo" />
 
 # mq-viewer
 
