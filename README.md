@@ -7,7 +7,7 @@ WIP: This is a little app to help look at sites across different viewports. Sort
 - [ ] url bar
   - [X] visit site by url
   - [X] update based on page nav
-  - [ ] search engine integration 😭
+  - [X] search engine integration
   - [ ] history
   - [ ] bookmarks?
   - [ ] maaaaybe tabs
@@ -15,11 +15,11 @@ WIP: This is a little app to help look at sites across different viewports. Sort
   - [X] url sync
   - [ ] scroll sync
   - [ ] find element?
-- [ ] devices
+- [X] widths
   - [X] render multiple widths
-  - [ ] add height support
-  - [ ] new device form
-  - [ ] default devices
+  - [X] new device form
+  - [X] default widths
+- [ ] height support?
 
 ## Screenshot
 
