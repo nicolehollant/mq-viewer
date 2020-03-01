@@ -1,3 +1,5 @@
+![mq-viewer logo](app/build/icons/128x128.png)
+
 # mq-viewer
 
 WIP: This is a little app to help look at sites across different viewports. Sorta like a lightweight [sizzy](https://sizzy.co/)-clone.
