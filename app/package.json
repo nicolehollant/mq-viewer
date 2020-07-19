@@ -29,7 +29,7 @@
     "babel-plugin-transform-remove-console": "^6.9.4",
     "core-js": "^3.6.4",
     "electron-icon-builder": "^1.0.2",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "tailwindcss": "^1.2.0",
     "v-click-outside": "^3.0.1",
     "vue": "^2.6.11",
